@@ -1,7 +1,6 @@
 const template = document.createElement('template')
 template.innerHTML = `
 <link rel="stylesheet" href="./css/components/calculatorStyle.css">
-<h1>Välkommen till Miniräknaren</h1>
   <div class="calculator-container">
     <div class="number-display">
       <input type="text" id="display" readonly placeholder="0">

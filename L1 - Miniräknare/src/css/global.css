@@ -15,7 +15,15 @@ body {
   color: white;
 }
 
-.form-container {
+h1 {
+  white-space: pre-line;
+}
+
+.hidden {
+  display: none;
+}
+
+form {
   display: flex;
   flex-direction: column;
   text-align: center;
