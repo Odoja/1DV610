@@ -1,6 +1,7 @@
 const template = document.createElement('template')
 template.innerHTML = `
 <link rel="stylesheet" href="./css/components/calculatorStyle.css">
+<h1>Välkommen till Miniräknaren</h1>
   <div class="calculator-container">
     <div class="number-display">
       <input type="text" id="display" readonly placeholder="0">
@@ -34,7 +35,7 @@ template.innerHTML = `
 `
 customElements.define('my-calculator',
   /**
-   * .
+   * A custom web component representing a calculator.
    */
   class extends HTMLElement {
     /**
@@ -58,6 +59,11 @@ customElements.define('my-calculator',
 
     }
 
+    /**
+     * Updates the display with the given value.
+     * 
+     * @param {*} value - The value to be added to the display.
+     */
     updateDisplay(value) {
       if (this.text || this.display.value === '0') {
         this.display.value = value
@@ -67,14 +73,27 @@ customElements.define('my-calculator',
       }
     }
 
+    /**
+     * Clears the display.
+     * 
+     * @returns
+     */
     clearDisplay() {
       return this.display.value = ''
     }
 
+    /**
+     * Removes the last character from the display.
+     * 
+     * @returns
+     */
     backspace() {
       return this.display.value = this.display.value.slice(0, -1)
     }
 
+    /**
+     * Handles the calculation of the result based on the current input in the display.
+     */
     calculateResult() {
       const calculation = this.display.value
 
@@ -94,6 +113,9 @@ customElements.define('my-calculator',
       }
     }
 
+    /**
+     * Sets up all event listners for calculator buttons.
+     */
     setupEventListner() {
       this.shadowRoot.getElementById('clear').addEventListener('click', () => this.clearDisplay())
       this.shadowRoot.getElementById('backspace').addEventListener('click', () => this.backspace())

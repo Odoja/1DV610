@@ -1,3 +1,8 @@
+h1 {
+  text-align: center;
+  color: white;
+  font-family: 'Courier New', Courier, monospace;
+}
 
 .calculator-container {
   display: flex;
@@ -22,6 +27,7 @@
   padding: 0 10px;
   border-radius: 5px;
   border: none;
+  outline: none;
 }
 
 .button-display {
@@ -32,7 +38,7 @@
 
 /*--------------------------------- Buttons ---------------------------------*/
 
-.button-display button {
+button {
   cursor: pointer;
   color: white;
   font-size: 20px;
