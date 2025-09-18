@@ -31,7 +31,7 @@ template.innerHTML = `
         <button type="submit" id="review-btn">Send</button>
       </div>
     </form>
-    <!--<div id="comment-section"> 
+    <div id="comment-section"> 
     <div> 
       <select name="" id="">
         <option value="Newest">Newest Reviews</option>
@@ -42,7 +42,7 @@ template.innerHTML = `
     </div>
       <div class="comment-container">
         <h4>Username</h4>
-        <p>Review</p>
+        <p>Kommer från ett par gen 1. Apple kvalité rakt igenom som vanligt! Bättre brusreducering (märker faktiskt rätt tydlig skillnad). Adaptiv reducering, volym som sänks om du börjar prata. Etui med högtalare, lätt att spåra och man får ett ljud när den börjar ladda. Gillar dessa!</p>
         <span>Rating: *Star*</span>
       </div>
       <div class="comment-container">
@@ -55,7 +55,7 @@ template.innerHTML = `
         <p>Review</p>
         <span>Rating: *Star*</span>
       </div>
-    </div> -->
+    </div> 
   </div>
 `
 customElements.define('review-component',
@@ -102,7 +102,7 @@ customElements.define('review-component',
     }
 
     /**
-     * Takes the rating obtained from current rating and gives the input value the same.
+     * Takes the rating obtained from param and gives the input value/the current rating the same.
      *
      * @param {*} rating - data value from stars.
      */
@@ -128,6 +128,40 @@ customElements.define('review-component',
           star.classList.remove('filled')
         }
       })
+    }
+
+    /**
+     * Fetches the reviews from the database and displays them.
+     */
+    async showReviews () {
+      try {
+        const res = await fetch('/review/all') // fill-in-your own route
+        const reviews = await res.json()
+
+        const commentSection = this.shadowRoot.getElementById('comment-section')
+
+        reviews.forEach(review => {
+          const container = document.createElement('div')
+          container.classList.add('comment-container')
+
+          const username = document.createElement('h4')
+          username.textContent = review.username
+
+          const text = document.createElement('p')
+          text.textContent = review.review
+
+          const rating = document.createElement('span')
+          rating.textContent = `Rating: ${review.rating}`
+
+          container.appendChild(username)
+          container.appendChild(text)
+          container.appendChild(rating)
+
+          commentSection.appendChild(container)
+        })
+      } catch (err) {
+        console.error(err)
+      }
     }
   }
 )

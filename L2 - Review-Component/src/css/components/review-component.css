@@ -30,7 +30,7 @@
     }
 
     textarea {
-      width: 100%;
+      width: 780px;
       height: 150px;
       padding: 10px;
       resize: none;
@@ -117,6 +117,10 @@
       border: solid rgba(128, 128, 128, 0.225) 1px;
       padding: 10px;
       gap: 10px;
+
+      h4 {
+        margin: 0;
+      }
     }
   }
 }
