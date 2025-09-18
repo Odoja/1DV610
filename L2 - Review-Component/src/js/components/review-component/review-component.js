@@ -12,19 +12,19 @@ template.innerHTML = `
         <div id="star-rating">
           <span>Rating:</span>
           <input type="hidden" name="rating" id="rating" value="0">
-          <svg class="star" data-value="1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+          <svg class="star" data-value="1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none">
             <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25 L7 14.14 2 9.27l6.91-1.01L12 2z" />
           </svg>
-          <svg class="star" data-value="2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+          <svg class="star" data-value="2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none">
             <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25 L7 14.14 2 9.27l6.91-1.01L12 2z" />
           </svg>
-          <svg class="star" data-value="3" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+          <svg class="star" data-value="3" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none">
             <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25 L7 14.14 2 9.27l6.91-1.01L12 2z" />
           </svg>
-          <svg class="star" data-value="4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+          <svg class="star" data-value="4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none">
             <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25 L7 14.14 2 9.27l6.91-1.01L12 2z" />
           </svg>
-          <svg class="star" data-value="5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+          <svg class="star" data-value="5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none">
             <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25 L7 14.14 2 9.27l6.91-1.01L12 2z" />
           </svg>
         </div>
@@ -69,12 +69,65 @@ customElements.define('review-component',
     constructor () {
       super()
       this.attachShadow({ mode: 'open' }).appendChild(template.content.cloneNode(true))
+      this.currentRating = 0
+      this.stars = this.shadowRoot.querySelectorAll('.star')
     }
 
     /**
      * Sets up event listeners when the element is connected to the DOM.
      */
     connectedCallback () {
+      this.ratingSetup()
+    }
+
+    /**
+     * Setups the event listeners for the rating method.
+     */
+    ratingSetup () {
+      this.stars.forEach((star) => {
+        star.addEventListener('click', (star) => {
+          const rating = star.currentTarget.getAttribute('data-value')
+          this.setRating(rating)
+        })
+
+        star.addEventListener('mouseenter', (star) => {
+          const currentStar = star.currentTarget.getAttribute('data-value')
+          this.ratingDisplay(currentStar) // Stars are filled to the star the cursor is on.
+        })
+
+        star.addEventListener('mouseleave', () => {
+          this.ratingDisplay(this.currentRating) // Stars filled returned to the one that was selected.
+        })
+      })
+    }
+
+    /**
+     * Takes the rating obtained from current rating and gives the input value the same.
+     *
+     * @param {*} rating - data value from stars.
+     */
+    setRating (rating) {
+      const ratingInput = this.shadowRoot.querySelector('#rating')
+      this.currentRating = rating
+      ratingInput.value = rating
+      this.ratingDisplay(rating)
+    }
+
+    /**
+     * Updates the star color depending on the selected amount of stars.
+     *
+     * @param {*} rating - the amount of stars to be displayed.
+     */
+    ratingDisplay (rating) {
+      this.stars.forEach((star) => {
+        const starValue = star.getAttribute('data-value')
+
+        if (starValue <= rating) {
+          star.classList.add('filled')
+        } else {
+          star.classList.remove('filled')
+        }
+      })
     }
   }
 )

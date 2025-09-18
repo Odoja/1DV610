@@ -64,7 +64,13 @@
       }
 
       .star {
-        width: 22px;
+        width: 25px;
+        cursor: pointer;
+        fill: lightgray;
+
+        &.filled {
+          fill: #fdd215;
+        }
 
         &:hover {
           fill: #fdd215;
