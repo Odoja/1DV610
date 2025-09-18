@@ -32,30 +32,14 @@ template.innerHTML = `
       </div>
     </form>
     <div id="comment-section"> 
-    <div> 
+    <!-- <div> 
       <select name="" id="">
         <option value="Newest">Newest Reviews</option>
         <option value="Oldest">Oldest Reviews</option>
         <option value="Top-rated">Highest Score</option>
         <option value="Lowest-rated">Lowest Score</option>
       </select>
-    </div>
-      <div class="comment-container">
-        <h4>Username</h4>
-        <p>Kommer från ett par gen 1. Apple kvalité rakt igenom som vanligt! Bättre brusreducering (märker faktiskt rätt tydlig skillnad). Adaptiv reducering, volym som sänks om du börjar prata. Etui med högtalare, lätt att spåra och man får ett ljud när den börjar ladda. Gillar dessa!</p>
-        <span>Rating: *Star*</span>
-      </div>
-      <div class="comment-container">
-        <h4>Username</h4>
-        <p>Review</p>
-        <span>Rating: *Star*</span>
-      </div>
-      <div class="comment-container">
-        <h4>Username</h4>
-        <p>Review</p>
-        <span>Rating: *Star*</span>
-      </div>
-    </div> 
+      </div> -->
   </div>
 `
 customElements.define('review-component',
