@@ -62,6 +62,7 @@ customElements.define('review-component',
      */
     connectedCallback () {
       this.ratingSetup()
+      this.showReviews()
     }
 
     /**
@@ -135,7 +136,7 @@ customElements.define('review-component',
           text.textContent = review.review
 
           const rating = document.createElement('span')
-          rating.textContent = `Rating: ${review.rating}`
+          rating.textContent = `Rating: ${review.rating}/5`
 
           container.appendChild(username)
           container.appendChild(text)
@@ -146,6 +147,37 @@ customElements.define('review-component',
       } catch (err) {
         console.error(err)
       }
+    }
+
+    /**
+     * Handles form data and sends it to a database through a POST request.
+     */
+    formLogic () {
+      const form = this.shadowRoot.getElementById('review-form')
+
+      form.addEventListener('submit', async (e) => {
+        e.preventDefault()
+
+        const formData = new FormData(form)
+
+        try {
+          await fetch('/review/create', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              username: formData.get('username'),
+              review: formData.get('review'),
+              rating: formData.get('rating')
+            })
+          })
+
+          form.reset()
+          this.ratingInput.value = 0
+          this.ratingDisplay(0)
+        } catch (error) {
+          console.log(error)
+        }
+      })
     }
   }
 )
