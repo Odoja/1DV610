@@ -3,15 +3,15 @@ template.innerHTML = `
   <link rel="stylesheet" href="./css/components/review-component.css">
   <div class="container">
     <h1>Review</h1>
-    <form id="review-form" method="post" action="./fill-in-endpoint"> <!-- fill in endpoint later-->
+    <form id="review-form">
       <div id="top-section">
         <input type="text" id="username" name="username" placeholder="Name" required>
-        <textarea name="review-section" placeholder="Write you're review here"></textarea>
+        <textarea name="review" placeholder="Write you're review here" required></textarea>
       </div>
       <div id="bottom-section">
         <div id="star-rating">
           <span>Rating:</span>
-          <input type="hidden" name="rating" id="rating" value="0">
+          <input type="hidden" name="rating" id="rating" value="0" required>
           <svg class="star" data-value="1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none">
             <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25 L7 14.14 2 9.27l6.91-1.01L12 2z" />
           </svg>
@@ -32,14 +32,13 @@ template.innerHTML = `
       </div>
     </form>
     <div id="comment-section"> 
-    <!-- <div> 
+    <!--<div> 
       <select name="" id="">
         <option value="Newest">Newest Reviews</option>
         <option value="Oldest">Oldest Reviews</option>
         <option value="Top-rated">Highest Score</option>
         <option value="Lowest-rated">Lowest Score</option>
-      </select>
-      </div> -->
+      </select> -->
   </div>
 `
 customElements.define('review-component',
@@ -55,6 +54,7 @@ customElements.define('review-component',
       this.attachShadow({ mode: 'open' }).appendChild(template.content.cloneNode(true))
       this.currentRating = 0
       this.stars = this.shadowRoot.querySelectorAll('.star')
+      this.ratingInput = this.shadowRoot.querySelector('#rating')
     }
 
     /**
@@ -63,6 +63,7 @@ customElements.define('review-component',
     connectedCallback () {
       this.ratingSetup()
       this.showReviews()
+      this.formLogic()
     }
 
     /**
@@ -92,9 +93,8 @@ customElements.define('review-component',
      * @param {*} rating - data value from stars.
      */
     setRating (rating) {
-      const ratingInput = this.shadowRoot.querySelector('#rating')
       this.currentRating = rating
-      ratingInput.value = rating
+      this.ratingInput.value = rating
       this.ratingDisplay(rating)
     }
 
@@ -161,7 +161,7 @@ customElements.define('review-component',
         const formData = new FormData(form)
 
         try {
-          await fetch('/review/create', {
+          const response = await fetch('/review/create', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
@@ -171,13 +171,29 @@ customElements.define('review-component',
             })
           })
 
-          form.reset()
-          this.ratingInput.value = 0
-          this.ratingDisplay(0)
+          if (response.ok) {
+            form.reset()
+            this.ratingInput.value = 0
+            this.setRating(0)
+            this.updateCommentSection()
+          } else {
+            console.error('Failed to submit review')
+          }
         } catch (error) {
           console.log(error)
         }
       })
+    }
+
+    /**
+     * Updates the comment section.
+     */
+    updateCommentSection () {
+      setTimeout(() => {
+        const commentSection = this.shadowRoot.getElementById('comment-section')
+        commentSection.innerHTML = ''
+        this.showReviews()
+      }, 100)
     }
   }
 )

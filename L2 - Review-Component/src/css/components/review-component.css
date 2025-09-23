@@ -107,20 +107,22 @@
     flex-direction: column;
     margin-top: 50px;
     gap: 30px;
-
+    height: 500px;
+    overflow: scroll;
+    scrollbar-width: none;
 
     .comment-container {
       display: flex;
       flex-direction: column;
       box-shadow: 1px 1px 10px 0px rgba(0, 0, 0, 0.1);
       border-radius: 10px;
-      border: solid rgba(128, 128, 128, 0.225) 1px;
+      border: solid rgba(128, 128, 128, 0.225) 2px;
       padding: 10px;
       gap: 10px;
+    }
 
-      h4 {
-        margin: 0;
-      }
+    h4 {
+      margin: 0;
     }
   }
 }
