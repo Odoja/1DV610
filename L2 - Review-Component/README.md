@@ -2,11 +2,15 @@
 
 ## Reflektioner
 
-- [Reflektioner](./docs/reflektion/Kapitelreflektion-kap2.md)
-- [Reflektioner](./docs/reflektion/Kapitelreflektion-kap3.md)
-- [Reflektioner](./docs/reflektioner/ReflektionerFunktioner&Metoder.md)
-- [Reflektioner](./docs/reflektioner/ReflektionerNamngivning.md)
-- [Reflektioner](./docs/reflektioner/ReflektionKodkvalitet.md)
+- [Tabellreflektion för namnginving](./docs/reflektioner/ReflektionerNamngivning.md)
+
+- [Kapitelreflektion kap 2](./docs/reflektioner/Kapitelreflektion-kap2.md)
+
+- [Tabellreflektion för funktioner/metoder](./docs/reflektioner/ReflektionerFunktioner&Metoder.md)
+
+- [Kapitelreflektion kap 3](./docs/reflektioner/Kapitelreflektion-kap3.md)
+
+- [Reflektion över egen kodkvalitet](./docs/reflektioner/ReflektionKodkvalitet.md)
 
 ## Testrapport
 

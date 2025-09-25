@@ -32,13 +32,15 @@ template.innerHTML = `
       </div>
     </form>
     <div id="comment-section"> 
-    <!--<div> 
-      <select name="" id="">
-        <option value="Newest">Newest Reviews</option>
-        <option value="Oldest">Oldest Reviews</option>
-        <option value="Top-rated">Highest Score</option>
-        <option value="Lowest-rated">Lowest Score</option>
-      </select> -->
+      <div> 
+        <select name="" id="">
+          <option value="Newest">Newest Reviews</option>
+          <option value="Oldest">Oldest Reviews</option>
+          <option value="Top-rated">Highest Score</option>
+          <option value="Lowest-rated">Lowest Score</option>
+        </select>
+      </div>
+    </div>
   </div>
 `
 customElements.define('review-component',
