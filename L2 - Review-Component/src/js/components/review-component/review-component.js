@@ -36,8 +36,8 @@ template.innerHTML = `
         <select name="" id="">
           <option value="Newest">Newest Reviews</option>
           <option value="Oldest">Oldest Reviews</option>
-          <option value="Top-rated">Highest Score</option>
-          <option value="Lowest-rated">Lowest Score</option>
+          <option value="Top-rated">Highest Rating</option>
+          <option value="Lowest-rated">Lowest Rating</option>
         </select>
       </div>
     </div>
@@ -64,8 +64,9 @@ customElements.define('review-component',
      */
     connectedCallback () {
       this.ratingSetup()
-      this.showReviews()
+      this.displayReviews()
       this.formLogic()
+      this.filterSetup()
     }
 
     /**
@@ -120,32 +121,13 @@ customElements.define('review-component',
     /**
      * Fetches the reviews from the database and displays them.
      */
-    async showReviews () {
+    async displayReviews () {
       try {
         const res = await fetch('/review/all') // fill-in-your own route
         const reviews = await res.json()
+        console.log(reviews)
 
-        const commentSection = this.shadowRoot.getElementById('comment-section')
-
-        reviews.forEach(review => {
-          const container = document.createElement('div')
-          container.classList.add('comment-container')
-
-          const username = document.createElement('h4')
-          username.textContent = review.username
-
-          const text = document.createElement('p')
-          text.textContent = review.review
-
-          const rating = document.createElement('span')
-          rating.textContent = `Rating: ${review.rating}/5`
-
-          container.appendChild(username)
-          container.appendChild(text)
-          container.appendChild(rating)
-
-          commentSection.appendChild(container)
-        })
+        this.renderReviews(reviews)
       } catch (err) {
         console.error(err)
       }
@@ -194,8 +176,38 @@ customElements.define('review-component',
       setTimeout(() => {
         const commentSection = this.shadowRoot.getElementById('comment-section')
         commentSection.innerHTML = ''
-        this.showReviews()
+        this.displayReviews()
       }, 100)
+    }
+
+    filterSetup () {
+    }
+
+    commentFilter () {
+    }
+
+    renderReviews (reviews) {
+      const commentSection = this.shadowRoot.getElementById('comment-section')
+
+      reviews.forEach(review => {
+        const container = document.createElement('div')
+        container.classList.add('comment-container')
+
+        const username = document.createElement('h4')
+        username.textContent = review.username
+
+        const text = document.createElement('p')
+        text.textContent = review.review
+
+        const rating = document.createElement('span')
+        rating.textContent = `Rating: ${review.rating}/5`
+
+        container.appendChild(username)
+        container.appendChild(text)
+        container.appendChild(rating)
+
+        commentSection.appendChild(container)
+      })
     }
   }
 )
