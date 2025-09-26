@@ -31,15 +31,15 @@ template.innerHTML = `
         <button type="submit" id="review-btn">Send</button>
       </div>
     </form>
-    <div id="comment-section"> 
-      <div> 
-        <select name="" id="">
-          <option value="Newest">Newest Reviews</option>
-          <option value="Oldest">Oldest Reviews</option>
-          <option value="Top-rated">Highest Rating</option>
-          <option value="Lowest-rated">Lowest Rating</option>
-        </select>
-      </div>
+    <div id="comment-wrapper"> 
+      <select name="" id="filter-option">
+        <option value="Newest">Newest Reviews</option>
+        <option value="Oldest">Oldest Reviews</option>
+        <option value="Top-rated">Highest Rating</option>
+        <option value="Lowest-rated">Lowest Rating</option>
+      </select>
+      <div id="comment-section">
+      </div> 
     </div>
   </div>
 `
@@ -180,12 +180,55 @@ customElements.define('review-component',
       }, 100)
     }
 
+    /**
+     * Setups the event listeners for option filter.
+     */
     filterSetup () {
+      const filterOption = this.shadowRoot.getElementById('filter-option')
+      filterOption.addEventListener('change', (e) => {
+        this.commentFilter(e.target.value)
+      })
     }
 
-    commentFilter () {
+    /**
+     * Sorting logic for the comments.
+     *
+     * @param {string} filterOption - the filter the code is going to sort by.
+     */
+    async commentFilter (filterOption) {
+      try {
+        const res = await fetch('/review/all')
+        const reviews = await res.json()
+
+        switch (filterOption) {
+          case 'Newest':
+            reviews.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
+            break
+          case 'Oldest':
+            reviews.sort((a, b) => new Date(a.createdAt) - new Date(b.createdAt))
+            break
+          case 'Top-rated':
+            reviews.sort((a, b) => b.rating - a.rating)
+            break
+          case 'Lowest-rated':
+            reviews.sort((a, b) => a.rating - b.rating)
+            break
+          default:
+            break
+        }
+        const commentSection = this.shadowRoot.getElementById('comment-section')
+        commentSection.innerHTML = ''
+        this.renderReviews(reviews)
+      } catch (error) {
+        console.error(error)
+      }
     }
 
+    /**
+     * Renders reviews in the DOM.
+     *
+     * @param {*} reviews - a list with reviews.
+     */
     renderReviews (reviews) {
       const commentSection = this.shadowRoot.getElementById('comment-section')
 
