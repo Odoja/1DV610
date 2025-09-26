@@ -125,7 +125,7 @@ customElements.define('review-component',
       try {
         const res = await fetch('/review/all') // fill-in-your own route
         const reviews = await res.json()
-        console.log(reviews)
+        // console.log(reviews)
 
         this.renderReviews(reviews)
       } catch (err) {
