@@ -2,11 +2,8 @@
 
 | Namn                        | Förklaring         | Reflektion och regler från Clean Code |
 |-----------------------------|--------------------|---------------------------------------|
-| displayReviews()            | Metod som hämtar och visar recensioner.                   |                                       |
-| renderReviews(reviews)      | Metod som skapar element och fyller de med information.                   | **Use Intention-Reaveling Names** Namnet är simpelt, tydligt, och förklarar vad metoden gör. **Method Names** Metoder bör ha ett verb som förklarar vad den gör, vilket denna följer. |
-| commentFilter(filterOption) | Metod som sorterar recensionerna baserat på det valda filtret.                   |                                       |
-| filter-option               |                     |                                       |
-| updateCommentSection()      | Metod som uppdaterar recensions sektionen när man skapar en ny recension.                   |                                       |
-
-## Reflektion
-
+| displayReviews()            | Metod som hämtar och visar recensioner.                   |             **Use Pronounceable Names** Metodnamnet är riktiga ord och inte slumpmässiga bokstäver vilket gör det lätt att läsa och disskutera. **Use Searchable Names** Metodnamnet är tillräckligt långt och specifikt nog för att kunna sökas efter i koden.|
+| renderReviews(reviews)      | Metod som skapar element och fyller de med information.                   | **Use Intention-Reaveling Names** Namnet är simpelt, tydligt, och förklarar vad metoden gör. **Method Names** Metoder bör ha ett verb som förklarar vad den gör, vilket denna följer. **Use Solution Domain Names** "Render" är känt begrepp inom webbutveckling som andra programmerare kommer förstå¨.|
+| commentFilter(filterOption) | Metod som sorterar recensionerna baserat på det valda filtret.            |**Use Intention-Reaveling Names** Lite vilseledande då metoden egentligen sorterar kommentarerna och inte filtrerar. **Pick One Word per Concept** Komponenten är en recensionskomponent, "review", det blir konstigt när jag frångått det och använder mig av "comment" även om det kan ses som synonymt. **Avoid Disinformation** Filter kan vilseleda eftersom metoden sorterar och inte filtrerar. |
+| filter-option               | Select-element för att välja sorteringsalternativ  | **Avoid Mental Mapping** Namnet kräver kanske lite tänkande eftersom namnet handlar om sortering och inte filtrering.                                      |
+| updateCommentSection()      | Metod som uppdaterar recensions sektionen när man skapar en ny recension.                   | **Add Meaningful Context** Namnet ger kontext genom att berätta vilken del av komponenten som uppdateras. **Pick One Word par Concept** Samma som ovan, det är en "review" komponent och inte "comment", updateReviewSection hade varit bättre.|
