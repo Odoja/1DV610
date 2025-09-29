@@ -123,7 +123,7 @@ customElements.define('review-component',
      */
     async displayReviews () {
       try {
-        const res = await fetch('/review/all') // fill-in-your own route
+        const res = await fetch('/review/all') // fill in your own fetch route
         const reviews = await res.json()
         // console.log(reviews)
 
@@ -197,7 +197,7 @@ customElements.define('review-component',
      */
     async commentFilter (filterOption) {
       try {
-        const res = await fetch('/review/all')
+        const res = await fetch('/review/all') // fill in your own fetch route
         const reviews = await res.json()
 
         switch (filterOption) {
