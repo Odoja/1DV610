@@ -32,7 +32,7 @@ template.innerHTML = `
       </div>
     </form>
     <div id="comment-wrapper"> 
-      <select name="" id="filter-option">
+      <select name="" id="filter-option" class="hidden">
         <option value="Newest">Newest Reviews</option>
         <option value="Oldest">Oldest Reviews</option>
         <option value="Top-rated">Highest Rating</option>
@@ -126,7 +126,7 @@ customElements.define('review-component',
         const res = await fetch('/review/all') // fill in your own fetch route
         const reviews = await res.json()
         // console.log(reviews)
-
+        this.displaySortOptions(reviews)
         this.renderReviews(reviews)
       } catch (err) {
         console.error(err)
@@ -174,8 +174,6 @@ customElements.define('review-component',
      */
     updateCommentSection () {
       setTimeout(() => {
-        const commentSection = this.shadowRoot.getElementById('comment-section')
-        commentSection.innerHTML = ''
         this.displayReviews()
       }, 100)
     }
@@ -200,6 +198,8 @@ customElements.define('review-component',
         const res = await fetch('/review/all') // fill in your own fetch route
         const reviews = await res.json()
 
+        this.displaySortOptions(reviews)
+
         switch (filterOption) {
           case 'Newest':
             reviews.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
@@ -216,8 +216,7 @@ customElements.define('review-component',
           default:
             break
         }
-        const commentSection = this.shadowRoot.getElementById('comment-section')
-        commentSection.innerHTML = ''
+
         this.renderReviews(reviews)
       } catch (error) {
         console.error(error)
@@ -231,6 +230,7 @@ customElements.define('review-component',
      */
     renderReviews (reviews) {
       const commentSection = this.shadowRoot.getElementById('comment-section')
+      commentSection.innerHTML = ''
 
       reviews.forEach(review => {
         const container = document.createElement('div')
@@ -243,7 +243,7 @@ customElements.define('review-component',
         text.textContent = review.review
 
         const rating = document.createElement('span')
-        rating.textContent = `Rating: ${review.rating}/5`
+        rating.textContent = `Rating: ${review.rating}/5` // change from numbers to stars.
 
         container.appendChild(username)
         container.appendChild(text)
@@ -251,6 +251,21 @@ customElements.define('review-component',
 
         commentSection.appendChild(container)
       })
+    }
+
+    /**
+     * Displays the sorting for reviews depending if there are reviews to be shown or not.
+     *
+     * @param {*} reviews - a list with reviews.
+     */
+    displaySortOptions (reviews) {
+      const sortList = this.shadowRoot.getElementById('filter-option')
+
+      if (!reviews || reviews.length === 0) {
+        sortList.classList.add('hidden')
+      } else {
+        sortList.classList.remove('hidden')
+      }
     }
   }
 )

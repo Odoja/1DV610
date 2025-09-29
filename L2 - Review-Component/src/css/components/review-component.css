@@ -103,29 +103,33 @@
   }
 
   select {
-      border: 1px solid #ccc;
-      border-radius: 6px;
-      color: #333;
-      cursor: pointer;
-      font-size: 1rem;
-      padding: 0.5rem 2rem 0.5rem 0.75rem;
-      margin-top: 50px;
-      transition: border-color 0.2s;
-    
-      background-image: url("data:image/svg+xml;utf8,<svg fill='none' stroke='%23333' stroke-width='2' viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'><path d='M6 9l6 6 6-6'/></svg>");
-      background-repeat: no-repeat;
-      background-position: right 0.6rem center;
-      background-size: 1rem;
-      appearance: none;
-      
-      &:focus {
-        outline: none;
-      }
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    color: #333;
+    cursor: pointer;
+    font-size: 1rem;
+    padding: 0.5rem 2rem 0.5rem 0.75rem;
+    margin-top: 50px;
+    transition: border-color 0.2s;
 
-      &:hover {
-        border-color: #999;
-      }
+    background-image: url("data:image/svg+xml;utf8,<svg fill='none' stroke='%23333' stroke-width='2' viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'><path d='M6 9l6 6 6-6'/></svg>");
+    background-repeat: no-repeat;
+    background-position: right 0.6rem center;
+    background-size: 1rem;
+    appearance: none;
+
+    &:focus {
+      outline: none;
     }
+
+    &:hover {
+      border-color: #999;
+    }
+  }
+
+  .hidden {
+    display: none;
+  }
 
   #comment-section {
     display: flex;
