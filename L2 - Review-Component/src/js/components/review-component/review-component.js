@@ -124,6 +124,11 @@ customElements.define('review-component',
     async displayReviews () {
       try {
         const res = await fetch('/review/all') // fill in your own fetch route
+
+        if (!res.ok) {
+          throw new Error(`HTTP error! status: ${res.status}`)
+        }
+
         const reviews = await res.json()
         // console.log(reviews)
         this.displaySortOptions(reviews)
@@ -143,15 +148,23 @@ customElements.define('review-component',
         e.preventDefault()
 
         const formData = new FormData(form)
+        const username = formData.get('username')
+        const review = formData.get('review')
+        const rating = formData.get('rating')
+
+        if (!username || !review || !rating || rating === '0') {
+          alert('Fill in all fields and select a rating')
+          return
+        }
 
         try {
           const response = await fetch('/review/create', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
-              username: formData.get('username'),
-              review: formData.get('review'),
-              rating: formData.get('rating')
+              username: username.trim(),
+              review: review.trim(),
+              rating
             })
           })
 
@@ -159,7 +172,7 @@ customElements.define('review-component',
             form.reset()
             this.ratingInput.value = 0
             this.setRating(0)
-            this.updateCommentSection()
+            this.displayReviews()
           } else {
             console.error('Failed to submit review')
           }
@@ -167,15 +180,6 @@ customElements.define('review-component',
           console.log(error)
         }
       })
-    }
-
-    /**
-     * Updates the comment section.
-     */
-    updateCommentSection () {
-      setTimeout(() => {
-        this.displayReviews()
-      }, 100)
     }
 
     /**
@@ -196,6 +200,10 @@ customElements.define('review-component',
     async commentFilter (filterOption) {
       try {
         const res = await fetch('/review/all') // fill in your own fetch route
+
+        if (!res.ok) {
+          throw new Error(`HTTP error! status: ${res.status}`)
+        }
         const reviews = await res.json()
 
         this.displaySortOptions(reviews)
