@@ -1,4 +1,43 @@
-# Andra uppgiften, Modul, i kursen 1DV610.
+# Review Component
+
+En återanvändbar Web Component för att skapa och visa recensioner med stjärnbetyg.
+
+## Översikt
+
+Review Component är en frontend-webbkomponent som tillhandahåller ett användargränssnitt för att:
+
+- Skapa recensioner med namn, text och stjärnbetyg (1-5)
+- Visa befintliga recensioner
+- Sortera recensioner (nyaste, äldsta, högst betyg, lägst betyg)
+
+## Viktigt - Backend
+
+Denna komponent innehåller endast frontend-koden. För att komponenten ska fungera fullt ut måste du bygga din egen backend med endpoints
+
+### Var du fyller i dina endpoints?
+
+I filen review-component.js finns kommentarer som visar var du ska ange dina egna routes:
+ 
+- displayReviews() - rad 126: fetch('/review/all')
+- formLogic() - rad 161: fetch('/review/create', { ... })
+- commentFilter() - rad 202: fetch('/review/all')
+
+## Installation
+
+1. Kopiera review-component.js till ditt projekt
+2. Kopiera CSS-filen review-component.css till ./css/components/
+3. Inkludera komponenten i din HTML:
+
+![Tabellreflektion för namnginving](./docs/img/användande.png)
+
+## Exempel på hur komponenten ser ut utan recensioner
+
+![Tabellreflektion för namnginving](./docs/img/Exempel.png)
+
+## Exempel på hur komponenten ser ut med recensioner
+
+![Tabellreflektion för namnginving](./docs/img/Exempel2.png)
+
 
 ## Reflektioner
 
