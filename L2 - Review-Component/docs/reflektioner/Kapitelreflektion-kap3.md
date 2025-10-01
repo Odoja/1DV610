@@ -1,3 +1,6 @@
 # Kapitelreflektion kap 3
 
 Som föregående kapitel finns det saker jag håller med om men inte i närheten av lika mycket. Jag förstår logiken i att dela upp koden så mycket som möjligt så att varje metod bara gör en sak och man har flera små byggstenar som går ihop till något större. Problemet för mig är att när en metod består av 4 metoder som initieras och dessa metoder består ytterligare av metoder man måste gå igenom innan man kommer till metoderna med själva koden, så minskas läsförståelsen av koden. Det är i viss mån lättare att läsa en metod med kod som gör flera saker så länge koden inte är för lång! Till varje scenario finns alltid undantag, och det svåra är väl att hitta medelvägen. Inte för långa metoder/funktioner, men inte kompartmentalisera till för extrema nivåer.
+
+Jag kan absolut dela upp min kod mer nu efter att jag gått igenom tabelreflektionen och faktiskt jämfört min kod mot det som står i boken.
+Jag har redan försökt minska DRY till en viss del genom att plasera några querySelectors i constructorn som jag kallar på flera olika ställen. Jag skulle dock vilja göra min fetch request till en egen metod också, då den används på flera ställen, samt kanske dela upp min renderReviews så att jag har hjälpmetoder för skapandet av element.

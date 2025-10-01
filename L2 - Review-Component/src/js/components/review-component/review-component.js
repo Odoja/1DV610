@@ -158,7 +158,7 @@ customElements.define('review-component',
         }
 
         try {
-          const response = await fetch('/review/create', {
+          const response = await fetch('/review/create', { // fill in your own fetch route
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
