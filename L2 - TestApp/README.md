@@ -23,9 +23,6 @@ En enkel testapplikation.
    # Databas
    DB_CONNECTION_STRING="mongodb://localhost:27017/Test"
 
-   # Session
-   SESSION_SECRET="din-hemliga-session-nyckel"
-
    # PORT
    PORT=8083
 

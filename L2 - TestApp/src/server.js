@@ -1,10 +1,8 @@
 import express from 'express'
 import expressLayouts from 'express-ejs-layouts'
-import session from 'express-session'
 import { dirname, join } from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { connectToDatabase } from './config/mongoose.js'
-import { sessionOptions } from './config/sessionOptions.js'
 import { router } from './routes/router.js'
 
 try {
@@ -35,8 +33,6 @@ try {
 
   // Serve static files.
   app.use(express.static(join(directoryFullName, '..', 'public')))
-
-  app.use(session(sessionOptions))
 
   // Middleware to be executed before the routes.
   app.use((req, res, next) => {

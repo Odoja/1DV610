@@ -1,1 +1,1 @@
-import './components/review-component/index.js'
+import './review-component/index.js'

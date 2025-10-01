@@ -1,6 +1,6 @@
 const template = document.createElement('template')
 template.innerHTML = `
-  <link rel="stylesheet" href="./css/components/review-component.css">
+  <link rel="stylesheet" href="./css/review-component.css">
   <div class="container">
     <h1>Review</h1>
     <form id="review-form">
@@ -11,7 +11,7 @@ template.innerHTML = `
       <div id="bottom-section">
         <div id="star-rating">
           <span>Rating:</span>
-          <input type="hidden" name="rating" id="rating" value="0" required>
+          <input type="hidden" name="rating" id="rating" value="" required>
           <svg class="star" data-value="1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none">
             <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25 L7 14.14 2 9.27l6.91-1.01L12 2z" />
           </svg>
@@ -152,7 +152,7 @@ customElements.define('review-component',
         const review = formData.get('review')
         const rating = formData.get('rating')
 
-        if (!username || !review || !rating || rating === '0') {
+        if (!username || !review || !rating) {
           alert('Fill in all fields and select a rating')
           return
         }
@@ -170,14 +170,13 @@ customElements.define('review-component',
 
           if (response.ok) {
             form.reset()
-            this.ratingInput.value = 0
             this.setRating(0)
             this.displayReviews()
           } else {
-            console.error('Failed to submit review')
+            console.error('Failed to submit review ' + response.status)
           }
         } catch (error) {
-          console.log(error)
+          console.error(error)
         }
       })
     }

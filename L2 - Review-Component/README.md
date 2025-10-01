@@ -10,7 +10,7 @@ Review Component är en frontend-webbkomponent som tillhandahåller ett använda
 - Visa befintliga recensioner
 - Sortera recensioner (nyaste, äldsta, högst betyg, lägst betyg)
 
-## Viktigt - Backend
+## Viktigt! - Backend
 
 Denna komponent innehåller endast frontend-koden. För att komponenten ska fungera fullt ut måste du bygga din egen backend med endpoints
 
@@ -24,8 +24,8 @@ I filen review-component.js finns kommentarer som visar var du ska ange dina egn
 
 ## Installation
 
-1. Kopiera review-component.js till ditt projekt
-2. Kopiera CSS-filen review-component.css till ./css/components/
+1. Kopiera review-component.js till ditt projekt, se till att den är exporterad/importerad till din globala .js fil om du använder en sån i din HTML.
+2. Kopiera CSS-filen review-component.css till din CSS-folder, se till så att path länkarna stämmer överens.
 3. Inkludera komponenten i din HTML:
 
 ![Tabellreflektion för namnginving](./docs/img/användande.png)

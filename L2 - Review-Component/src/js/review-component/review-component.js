@@ -1,6 +1,6 @@
 const template = document.createElement('template')
 template.innerHTML = `
-  <link rel="stylesheet" href="./css/components/review-component.css">
+  <link rel="stylesheet" href="./css/review-component.css">
   <div class="container">
     <h1>Review</h1>
     <form id="review-form">
