@@ -182,15 +182,6 @@ customElements.define('review-component',
     }
 
     /**
-     * Updates the comment section.
-     */
-    updateCommentSection () {
-      setTimeout(() => {
-        this.displayReviews()
-      }, 100)
-    }
-
-    /**
      * Setups the event listeners for option filter.
      */
     filterSetup () {
